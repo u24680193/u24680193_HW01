@@ -1,0 +1,39 @@
+﻿@model List<u24680193_HW01.Models.Booking>
+@{
+    ViewBag.Title = "Ride History";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container py-5">
+    <h2 class="text-center mb-4" style="color: #4B3F72;">Ride History</h2>
+
+    @if (!Model.Any())
+    {
+        <p class="text-center text-muted">No bookings found.</p>
+    }
+    else
+    {
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            @foreach (var booking in Model)
+            {
+                <div class="col">
+                    <a href="@Url.Action("Confirmed", "Booking", new { id = booking.BookingID })" class="text-decoration-none">
+                        <div class="card h-100 @(booking.IsSOS ? "border-danger" : "border-secondary") shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    @booking.ServiceType
+                                    @{ if (booking.IsSOS)
+                                        { @Html.Raw("<span class=\"badge bg-danger ms-2\">S.O.S</span>") } }
+
+                                </h5>
+                                <p class="card-text mb-1"><strong>Date:</strong> @booking.Date.ToString("dd/MM/yyyy")</p>
+                                <p class="card-text mb-1"><strong>Patient:</strong> @booking.FullName</p>
+                                <p class="card-text mb-1"><strong>Pickup:</strong> @booking.PickupAddress</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
+    }
+</div>

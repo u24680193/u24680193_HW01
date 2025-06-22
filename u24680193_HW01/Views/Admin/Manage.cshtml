@@ -1,0 +1,104 @@
+﻿@{
+    ViewBag.Title = "Manage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var drivers = ViewBag.Drivers as List<u24680193_HW01.Models.Driver> ?? new List<u24680193_HW01.Models.Driver>();
+    var vehicles = ViewBag.Vehicles as List<u24680193_HW01.Models.Vehicle> ?? new List<u24680193_HW01.Models.Vehicle>();
+}
+
+<form method="post" action="@Url.Action("SearchDrivers", "Admin")" class="row g-3 mb-4">
+    <div class="col-md-4">
+        <input type="text" name="firstName" class="form-control" placeholder="Search by first name..." />
+    </div>
+
+    <div class="col-md-4">
+        <select name="serviceType" class="form-select">
+            <option value="">All Services</option>
+            <option>Advanced Life Support</option>
+            <option>Basic Life Support</option>
+            <option>Event Medical Ambulance</option>
+            <option>Medical Utility Vehicle</option>
+            <option>Patient Support</option>
+            <option>Air Ambulance</option>
+        </select>
+    </div>
+
+    <div class="col-md-4">
+        <button type="submit" class="btn btn-success px-4 rounded-pill">Search</button>
+        <a href="@Url.Action("Manage", "Admin")" class="btn btn-outline-secondary px-4 rounded-pill ms-2">Reset</a>
+    </div>
+</form>
+
+
+<div class="bg-white rounded-4 shadow-sm p-4 mb-5">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4>Drivers</h4>
+        <a href="@Url.Action("CreateDriver", "Admin")" class="btn btn-primary rounded-pill px-4">Create</a>
+    </div>
+
+    <table class="table align-middle table-borderless">
+        <thead class="table-light">
+            <tr>
+                <th>Image</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Phone</th>
+                <th>Service</th>
+                <th class="text-end">Controls</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var d in drivers)
+            {
+                <tr>
+                    <td><img src="@Url.Content(d.ImagePath)" class="rounded-circle" style="width: 50px;" /></td>
+                    <td>@d.FirstName</td>
+                    <td>@d.LastName</td>
+                    <td>@d.PhoneNumber</td>
+                    <td>@d.ServiceType</td>
+                    <td class="text-end">
+                        <a href="@Url.Action("EditDriver", "Admin", new { id = d.Id })" class="btn btn-warning btn-sm rounded-pill me-2">Update</a>
+                        <a href="@Url.Action("DeleteDriver", "Admin", new { id = d.Id })" class="btn btn-danger btn-sm rounded-pill">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="bg-white rounded-4 shadow-sm p-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4>Vehicles</h4>
+        <div>
+            <a href="@Url.Action("CreateVehicle", "Admin")" class="btn btn-primary rounded-pill px-4 me-2">Create</a>
+            <a href="@Url.Action("ExportVehicles", "Admin")" class="btn btn-success rounded-pill px-4">Export</a>
+        </div>
+    </div>
+
+    <table class="table align-middle table-borderless">
+        <thead class="table-light">
+            <tr>
+                <th>Image</th>
+                <th>Type</th>
+                <th>Registration</th>
+                <th>Service</th>
+                <th class="text-end">Controls</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var v in vehicles)
+            {
+                <tr>
+                    <td><img src="@Url.Content(v.ImagePath)" class="rounded-circle" style="width: 50px;" /></td>
+                    <td>@v.VehicleName</td>
+                    <td>@v.RegistrationNumber</td>
+                    <td>@v.ServiceType</td>
+                    <td class="text-end">
+                        <a href="@Url.Action("EditVehicle", "Admin", new { id = v.Id })" class="btn btn-warning btn-sm rounded-pill me-2">Update</a>
+                        <a href="@Url.Action("DeleteVehicle", "Admin", new { id = v.Id })" class="btn btn-danger btn-sm rounded-pill">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

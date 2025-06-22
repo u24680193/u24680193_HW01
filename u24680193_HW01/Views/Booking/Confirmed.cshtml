@@ -1,0 +1,43 @@
+﻿@model u24680193_HW01.Models.Booking
+@{
+    ViewBag.Title = "Booking Confirmed";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <img src="~/Content/images/check icon.png" alt="Confirmed" style="height: 60px;" />
+        <h2 class="mt-3 fw-bold" style="color: #4B3F72;">Booking Confirmed</h2>
+    </div>
+
+    
+    <div class="bg-white rounded-4 shadow-sm p-4 mb-4">
+        <h5 class="fw-bold text-center" style="color: #4B3F72;">Booking Details</h5>
+        <div class="mt-3">
+            <p><strong>Booking ID:</strong> @Model.BookingID</p>
+            <p><strong>Date Booked:</strong> @Model.Date.ToString("dd/MM/yyyy")</p>
+            <p><strong>Pick-Up Time:</strong> @Model.PickupTime</p>
+            <p><strong>Pick-Up Address:</strong> @Model.PickupAddress</p>
+        </div>
+    </div>
+
+    <!-- Driver Details -->
+    <div class="bg-white rounded-4 shadow-sm p-4 mb-4">
+        <h5 class="fw-bold text-center" style="color: #4B3F72;">Driver Details</h5>
+        <div class="text-center mt-3">
+            <img src="@Url.Content(Model.Driver.ImagePath)" class="rounded-circle mb-2" style="width: 120px; height: 120px; object-fit: cover;" alt="Driver Photo" />
+            <p><strong>Driver Name:</strong> @Model.Driver.FirstName</p>
+            <p><strong>Phone Number:</strong> @Model.Driver.PhoneNumber</p>
+        </div>
+    </div>
+
+    <!-- Ambulance Details -->
+    <div class="bg-white rounded-4 shadow-sm p-4 mb-4">
+        <h5 class="fw-bold text-center" style="color: #4B3F72;">Ambulance Details</h5>
+        <div class="text-center mt-3">
+            <img src="@Url.Content(Model.Vehicle.ImagePath)" class="mb-2" style="height: 80px;" alt="Vehicle Icon" />
+            <p><strong>Ambulance Type:</strong> @Model.Vehicle.VehicleName</p>
+            <p><strong>Registration Number:</strong> @Model.Vehicle.RegistrationNumber</p>
+        </div>
+    </div>
+</div>

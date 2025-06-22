@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="text-center mt-5">
+    <h1 class="mb-4">Welcome to RescueBus</h1>
+    <p class="lead mb-4">Your trusted partner for emergency medical transportation.</p>
+    <p class="lead mb-4">Book an ambulance for help and medical attention.</p>
+
+    <div class="d-grid gap-3 col-6 mx-auto">
+        <a href="@Url.Action("SelectService", "Booking")" class="btn btn-success btn-lg">BOOK AMBULANCE</a>
+
+        <p class="lead mb-4">Use the S.O.S. feature for immediate emergency help only.</p>
+        <div class="d-flex justify-content-center my-5">
+            <form action="@Url.Action("SOS", "Home")" method="post">
+                <button onclick="location.href='Confirmed.html'"
+                        type="submit" 
+                        class="btn btn-danger rounded-circle d-flex align-items-center justify-content-center"
+                        style="width: 200px; height: 200px; font-size: 2.5rem; font-weight: bold;">
+                    S.O.S.
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

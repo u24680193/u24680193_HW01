@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "Booking Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container py-5">
+    <div class="text-center mb-4">
+        <img src="~/Content/images/ambulance icon.png" alt="Ambulance Icon" style="height: 150px;" />
+        <h2 class="mt-2 fw-bold" style="color: #4B3F72;">@ViewBag.ServiceType</h2>
+    </div>
+
+    <div class="bg-light rounded-4 shadow p-4 p-md-5 mx-auto" style="max-width: 700px;">
+        <form action="@Url.Action("BookingForm", "Booking")" method="post">
+            <input type="hidden" name="serviceType" value="@ViewBag.ServiceType" />
+
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Full Name*</label>
+                    <input type="text" class="form-control rounded-pill" name="fullName" placeholder="John Doe" required />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Phone*</label>
+                    <input type="tel" class="form-control rounded-pill" name="phoneNumber" placeholder="+27 00 000 0000" required />
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Pick-Up Time*</label>
+                    <input type="time" class="form-control rounded-pill" name="pickupTime" required />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Reason*</label>
+                    <select class="form-select rounded-pill" name="reason" required>
+                        <option disabled selected value="">Select reason</option>
+                        <option>Accident</option>
+                        <option>Emergency</option>
+                        <option>Transfer</option>
+                        <option>Event</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="driverId" class="form-label">Select Driver</label>
+                    @Html.DropDownList("driverId", (SelectList)ViewBag.Drivers, "Choose...", new { @class = "form-select", required = "required" })
+                </div>
+
+                <div class="mb-3">
+                    <label for="vehicleId" class="form-label">Select Vehicle</label>
+                    @Html.DropDownList("vehicleId", (SelectList)ViewBag.Vehicles, "Choose...", new { @class = "form-select", required = "required" })
+                </div>
+
+                <div class="col-12">
+                    <label class="form-label fw-semibold">Pick-Up Address</label>
+                    <textarea class="form-control rounded-4" name="pickupAddress" rows="3" placeholder="Please type your address here..." required></textarea>
+                </div>
+            </div>
+
+            <div class="d-grid mt-4">
+                <button type="submit" class="btn btn-primary rounded-pill py-2 fw-bold" style="background-color: #4B3F72;">
+                    BOOK AMBULANCE
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>

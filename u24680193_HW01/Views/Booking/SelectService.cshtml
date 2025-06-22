@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "Select a Service";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var services = new[]
+    {
+        new { Name = "Advanced Life Support", Description = "Advanced Life Support is emergency medical care that includes advanced procedures like airway management, medication, and cardiac monitoring to treat life-threatening conditions.", Image = Url.Content("~/Content/images/advanced.png")},
+        new { Name = "Basic Life Support", Description = "Basic Life Support is emergency care that involves CPR and rescue breathing to maintain a person's breathing and circulation until advanced help arrives.", Image = Url.Content("~/Content/images/basic.png") },
+        new { Name = "Patient Support", Description = "Patient support refers to the compassionate care, communication, and physical assistance provided to ensure a patient’s comfort, dignity, and emotional well-being during medical treatment or recovery.", Image = Url.Content("~/Content/images/patient.png") },
+        new { Name = "Medical Utility Vehicle", Description = "A medical utility vehicle is a specially equipped vehicle used to transport medical supplies, equipment, or personnel to and from emergency scenes, hospitals, or clinics, especially in situations where rapid medical response is needed.", Image = Url.Content("~/Content/images/utility.png") },
+        new { Name = "Event Medical Ambulance", Description = "An Event Medical Ambulance provides on-site emergency care and transport during public events.", Image = Url.Content("~/Content/images/event.png") },
+        new { Name = "Air Ambulance", Description = "An Air Ambulance is a specially equipped aircraft used to transport critically ill or injured patients quickly to medical facilities.", Image = Url.Content("~/Content/images/air.png") }
+    };
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Select a Service</h2>
+
+    <div class="row g-4 text-center">
+        @foreach (var service in services)
+        {
+            <div class="col-md-4">
+                <form action="@Url.Action("BookingForm", "Booking")" method="get">
+                    <input type="hidden" name="serviceType" value="@service.Name" />
+                    <div class="card h-100">
+                        <div class="card-body d-flex flex-column justify-content-between">
+                            <img src="@service.Image" alt="@service.Name" class="img-fluid mb-3" style="max-height: 175px;" />
+                            <h5 class="card-title">@service.Name</h5>
+                            <p class="card-text text-muted">@service.Description</p>
+                            <button type="submit" class="btn btn-outline-primary w-100 py-3">Select</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        }
+    </div>
+</div>
+
